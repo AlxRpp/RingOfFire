@@ -1,0 +1,60 @@
+.startScreen {
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
+
+
+    >img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        top: 100px;
+        left: 100px;
+
+
+        >h1 {
+            color: white;
+            font-size: 128px;
+        }
+
+        >button {
+            width: 300px;
+            height: 52px;
+            border-radius: 12px;
+            margin-top: 48px;
+            background-color: #DB0300;
+            border:  1px solid white;
+            color: white;
+            font-size: 28px;
+            transition: all .3s ease-in-out;
+
+            &:hover{
+                color: #FB9022;
+                border: 1px solid #FB9022;
+            }
+        }
+    }
+
+
+
+
+}
+
+.fire {
+    img {
+        height: 60%;
+        aspect-ratio: 1 / 1;
+        position: fixed;
+        bottom: -75px;
+        left: 5%;
+        transform: rotateZ(15deg);
+    }
+}
