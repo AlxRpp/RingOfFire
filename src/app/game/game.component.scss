@@ -27,8 +27,21 @@
     }
 
     .pickedCard{
-            transition: all .125s ease-in-out;
-            transform: scale(1.5) translate(50%, -50%) !important;
+            animation: pickCard-Animation 1s ease-in-out forwards;
+    }
 
+    @keyframes pickCard-Animation{
+        0%{
+            transform: scale(1.25) translate(50%, -50%);
+        }
+        40%{
+            transform: scale(2.2) translate(50%, -50%);
+        }
+        60%{
+            transform: scale(2.2) translate(50%, -50%) ;
+        }
+        100%{
+            transform: scale(1.25) translate(185%, -155%) rotate(390deg);
+        }
     }
 }
