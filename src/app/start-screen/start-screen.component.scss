@@ -2,23 +2,17 @@
     width: 100dvw;
     height: 100dvh;
     object-fit: cover;
+    background-image: url('../../assets/startScreen/startScreen.jpg');
+    background-size: cover;
 
-
-    >img {
-        width: 100%;
-        height: 100%;
-        display: block;
-    }
 
     div {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        position: absolute;
-        top: 100px;
-        left: 100px;
-
+        padding-top: 32px;
+        gap: 32px;
 
         >h1 {
             color: white;
@@ -34,11 +28,12 @@
             border:  1px solid white;
             color: white;
             font-size: 28px;
-            transition: all .3s ease-in-out;
+            transition: all .15s linear;
 
             &:hover{
                 color: #FB9022;
                 border: 1px solid #FB9022;
+                cursor: pointer;
             }
         }
     }
@@ -46,15 +41,4 @@
 
 
 
-}
-
-.fire {
-    img {
-        height: 60%;
-        aspect-ratio: 1 / 1;
-        position: fixed;
-        bottom: -75px;
-        left: 5%;
-        transform: rotateZ(15deg);
-    }
 }
