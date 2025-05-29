@@ -13,17 +13,25 @@ export class GameComponent {
 
   public game: Game
   animationPlayed = false;
+  currentCard: string | undefined
 
 
   constructor() {
     this.game = new Game();
     console.log(this.game);
-    
+
   }
 
 
 
   takeCard() {
-    this.animationPlayed = true;
+    if (!this.animationPlayed) {
+      this.currentCard = this.game.stack.pop()
+      this.animationPlayed = true;
+      setTimeout(() => {
+        this.animationPlayed = false
+      }, 1000)
+    }
   }
+
 }
