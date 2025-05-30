@@ -56,3 +56,14 @@
         position: absolute;
         right: 0;
     }
+
+    .fabBtn{
+        position: absolute;
+        right: 32px;
+        bottom: 32px;
+        background-color: darkgoldenrod;
+
+        &:hover{
+            transform: scale(1.125);
+        }
+    }
