@@ -22,15 +22,19 @@ export class GameComponent {
 
   }
 
-
-
   takeCard() {
     if (!this.animationPlayed) {
       this.currentCard = this.game.stack.pop()
       this.animationPlayed = true;
-      setTimeout(() => {
-        this.animationPlayed = false
-      }, 1000)
+
+      if (this.currentCard !== undefined) {
+        setTimeout(() => {
+          this.game.playedCards.push(this.currentCard as string)
+          this.animationPlayed = false
+        }, 1000)
+      } else {
+        console.log("Stack is empty");
+      }
     }
   }
 

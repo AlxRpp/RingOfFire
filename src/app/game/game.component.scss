@@ -30,6 +30,12 @@
             animation: pickCard-Animation 1s ease-in-out forwards;
     }
 
+    .playedCard{
+            transform: scale(1.25) translate(185%, -155%) rotate(200deg);
+            right: 20px;
+            top: 20px;
+    }
+
     @keyframes pickCard-Animation{
         0%{
             transform: scale(1.25) translate(50%, -50%);
@@ -41,7 +47,7 @@
             transform: scale(2.2) translate(50%, -50%) ;
         }
         100%{
-            transform: scale(1.25) translate(185%, -155%) rotate(390deg);
+            transform: scale(1.25) translate(185%, -155%) rotate(200deg);
         }
     }
 }
