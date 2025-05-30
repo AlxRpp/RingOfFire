@@ -1,0 +1,21 @@
+.profile{
+    display: flex;
+    align-items: center;
+    background-color: darkgoldenrod ;
+    width: 350px;
+    position: absolute;
+    right: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+
+    img{
+        width: 100px;
+        height: 100px;
+    }
+
+    span{
+        font-size: 32px;
+        font-weight: 500;
+        margin-left: 16px;
+    }
+}
