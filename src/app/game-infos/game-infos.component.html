@@ -1,4 +1,4 @@
 <mat-card class="gameInfos" >
-    <mat-card-title class="Titel">{{ title }}</mat-card-title>
-    <mat-card-content>{{ description }}</mat-card-content>
+    <mat-card-title class="Titel">{{card? title: 'Please pick a Card' }}</mat-card-title>
+    <mat-card-content>{{card? description: 'Click at the Card Stack to pick a Card' }}</mat-card-content>
 </mat-card>
