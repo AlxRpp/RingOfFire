@@ -4,7 +4,6 @@ import { Game } from '../../models/game';
 import { UserComponent } from "../user/user.component";
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 
 
 import {
@@ -21,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { GameInfosComponent } from "../game-infos/game-infos.component";
 
 @Component({
   selector: 'app-game',
@@ -28,7 +28,6 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
   imports: [
     CommonModule,
     UserComponent,
-    MatCardModule,
     UserComponent,
     MatButtonModule,
     MatIconModule,
@@ -36,8 +35,9 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatDialogModule
-  ],
+    MatDialogModule,
+    GameInfosComponent,
+],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
