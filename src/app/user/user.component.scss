@@ -1,19 +1,26 @@
-.profile{
+.profile {
     display: flex;
     align-items: center;
-    background-color: darkgoldenrod ;
+    background-color: rgba($color: #5d5d5d, $alpha: 0.8);
     width: 350px;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
 
-    img{
+    img {
         width: 64px;
         height: 64px;
     }
 
-    span{
+    span {
         font-size: 32px;
         font-weight: 500;
         margin-left: 16px;
     }
+
 }
+
+      .player-active {
+        background-color: darkgoldenrod !important;
+    }
+
+  

@@ -4,6 +4,8 @@ import { Game } from '../../models/game';
 import { UserComponent } from "../user/user.component";
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+
 
 import {
   MAT_DIALOG_DATA,
@@ -26,6 +28,7 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
   imports: [
     CommonModule,
     UserComponent,
+    MatCardModule,
     UserComponent,
     MatButtonModule,
     MatIconModule,
