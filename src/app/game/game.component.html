@@ -1,7 +1,7 @@
 <section class="playField">
 
     @for(player of game.players; track i; let i = $index){
-    <app-user [name]="player" class="playerPosition" [ngStyle]="{'top.px': 264 + ( 84* i)}"></app-user>
+    <app-user [name]="player" class="playerPosition" [ngStyle]="{'top.px': 64 + ( 84* i)}"></app-user>
     }
     <div class="cardStack">
         <img *ngFor="let card of [0,1,2,3,]; let i = index;" [ngStyle]="{'right.px': i * 5, 'top.px': i*5}"
