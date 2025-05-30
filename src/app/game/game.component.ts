@@ -63,7 +63,8 @@ export class GameComponent {
     if (!this.animationPlayed) {
       this.currentCard = this.game.stack.pop()
       this.animationPlayed = true;
-
+      this.game.currentPlayer++;
+      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       if (this.currentCard !== undefined) {
         setTimeout(() => {
           this.game.playedCards.push(this.currentCard as string)
