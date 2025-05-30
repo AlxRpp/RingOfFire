@@ -1,8 +1,11 @@
+@for(player of game.players; track i; let i = $index){
 <app-user 
-*ngFor="let player of game.players; let i = index"
+
 [name]="player"
-class="playerPosition" [ngStyle]="{'top.px': 100 + ( 120* i)}">
-</app-user>
+class="playerPosition" [ngStyle]="{'top.px': 264 + ( 84* i)}"
+></app-user>
+}
+
 
 <section class="playField">
     <div class="cardStack">

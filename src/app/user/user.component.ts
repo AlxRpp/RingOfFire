@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input,} from '@angular/core';
+import { Component, input, Input,} from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -9,8 +9,6 @@ import { Component, Input,} from '@angular/core';
   styleUrl: './user.component.scss'
 })
 export class UserComponent {
-
-  @Input() name:any ;
-
+  name = input.required<string>()
 
 }
