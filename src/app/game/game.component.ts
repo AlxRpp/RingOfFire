@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, model, signal } from '@angular/core';
+import { Component, inject, model, OnInit, signal } from '@angular/core';
 import { Game } from '../../models/game';
 import { UserComponent } from "../user/user.component";
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
-
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -21,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { GameInfosComponent } from "../game-infos/game-infos.component";
+import { FireBaseService } from '../services/fire-base.service';
 
 @Component({
   selector: 'app-game',
@@ -41,7 +40,7 @@ import { GameInfosComponent } from "../game-infos/game-infos.component";
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
-export class GameComponent {
+export class GameComponent implements OnInit  {
 
   public game: Game
   animationPlayed = false;
@@ -53,11 +52,21 @@ export class GameComponent {
   readonly name = model('');
   readonly dialog = inject(MatDialog);
 
-  constructor() {
+  constructor(private gameService: FireBaseService) {
     this.game = new Game();
     console.log(this.game);
-
   }
+
+  ngOnInit(){
+    this.gameService.gamesList();
+    this.gameService.addGame();
+  }
+
+
+  newGame(){
+    
+  }
+
 
   takeCard() {
     if (!this.animationPlayed) {
