@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { GameInfosComponent } from "../game-infos/game-infos.component";
 import { FireBaseService } from '../services/fire-base.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -36,35 +37,31 @@ import { FireBaseService } from '../services/fire-base.service';
     MatButtonModule,
     MatDialogModule,
     GameInfosComponent,
-],
+  ],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
-export class GameComponent implements OnInit  {
+export class GameComponent implements OnInit {
 
   public game: Game
   animationPlayed = false;
   currentCard: string | undefined
-
-
   //Dialog
   readonly animal = signal('');
   readonly name = model('');
   readonly dialog = inject(MatDialog);
 
-  constructor(private gameService: FireBaseService) {
+
+  constructor(private gameService: FireBaseService, private route: ActivatedRoute) {
     this.game = new Game();
-    console.log(this.game);
+    // console.log(this.game);
   }
 
-  ngOnInit(){
-    this.gameService.gamesList();
-    this.gameService.addGame();
-  }
-
-
-  newGame(){
-    
+  ngOnInit() {
+    this.gameService.addGame(this.game.toJson());
+    this.route.params.subscribe((params) => {
+      this.gameService.gamesList(params['id']);
+    })
   }
 
 
@@ -84,6 +81,7 @@ export class GameComponent implements OnInit  {
       }
     }
   }
+
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
