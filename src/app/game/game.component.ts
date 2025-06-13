@@ -19,8 +19,9 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { GameInfosComponent } from "../game-infos/game-infos.component";
-import { FireBaseService } from '../services/fire-base.service';
 import { ActivatedRoute } from '@angular/router';
+import { collection, Firestore, onSnapshot, addDoc, doc } from '@angular/fire/firestore';
+
 
 @Component({
   selector: 'app-game',
@@ -51,16 +52,18 @@ export class GameComponent implements OnInit {
   readonly name = model('');
   readonly dialog = inject(MatDialog);
 
+  firestore = inject(Firestore)
 
-  constructor(private gameService: FireBaseService, private route: ActivatedRoute) {
+
+  constructor(private route: ActivatedRoute) {
     this.game = new Game();
     // console.log(this.game);
   }
 
   ngOnInit() {
-    this.gameService.addGame(this.game.toJson());
+    this.addGame(this.game.toJson());
     this.route.params.subscribe((params) => {
-      this.gameService.gamesList(params['id']);
+      this.gamesList(params['id']);
     })
   }
 
@@ -97,5 +100,24 @@ export class GameComponent implements OnInit {
   }
 
 
+  getGamesRef() {
+    return collection(this.firestore, 'games')
+  }
 
+
+  gamesList(urlId: string) {
+    return onSnapshot(doc(this.getGamesRef(), urlId), (currentGame: any) => {
+      console.log("Game updated", currentGame.data().players);
+      
+      this.game.playedCards = currentGame.data().playedCards;
+      this.game.stack = currentGame.data().stack;
+      this.game.players = currentGame.data().players;
+      this.game.currentPlayer = currentGame.data().currentPlayer;
+
+    })
+  }
+
+  async addGame(game: any) {
+    await addDoc(this.getGamesRef(), game)
+  }
 }
