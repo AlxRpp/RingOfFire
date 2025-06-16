@@ -20,7 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { GameInfosComponent } from "../game-infos/game-infos.component";
 import { ActivatedRoute } from '@angular/router';
-import { collection, Firestore, onSnapshot, addDoc, doc } from '@angular/fire/firestore';
+import { collection, Firestore, onSnapshot, addDoc, doc, updateDoc } from '@angular/fire/firestore';
+
 
 
 @Component({
@@ -45,6 +46,7 @@ import { collection, Firestore, onSnapshot, addDoc, doc } from '@angular/fire/fi
 export class GameComponent implements OnInit {
 
   public game!: Game
+  gameId: string = ""
   animationPlayed = false;
   currentCard: string | undefined
   //Dialog
@@ -53,6 +55,7 @@ export class GameComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   firestore = inject(Firestore)
+
 
 
   constructor(private route: ActivatedRoute) {
@@ -64,23 +67,26 @@ export class GameComponent implements OnInit {
     this.addGame(this.game.toJson());
     this.route.params.subscribe((params) => {
       this.gamesList(params['id']);
+      this.gameId = params['id']
     })
   }
 
-  newGame(){
+  newGame() {
     this.game = new Game();
   }
 
   takeCard() {
     if (!this.animationPlayed) {
-      this.currentCard = this.game.stack.pop()
+      this.currentCard = this.game.stack.pop();
       this.animationPlayed = true;
+      this.saveGame();
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
       if (this.currentCard !== undefined) {
         setTimeout(() => {
           this.game.playedCards.push(this.currentCard as string)
           this.animationPlayed = false
+          this.saveGame();
         }, 1000)
       } else {
         console.log("Stack is empty");
@@ -98,6 +104,7 @@ export class GameComponent implements OnInit {
 
       if (name !== undefined) {
         this.game.players.push(name);
+        this.saveGame();
       }
     });
   }
@@ -111,7 +118,7 @@ export class GameComponent implements OnInit {
   gamesList(urlId: string) {
     return onSnapshot(doc(this.getGamesRef(), urlId), (currentGame: any) => {
       console.log("Game updated", currentGame.data().players);
-      
+
       this.game.playedCards = currentGame.data().playedCards;
       this.game.stack = currentGame.data().stack;
       this.game.players = currentGame.data().players;
@@ -122,5 +129,10 @@ export class GameComponent implements OnInit {
 
   async addGame(game: any) {
     await addDoc(this.getGamesRef(), game)
+  }
+
+  async saveGame() {
+    const gameRef = doc(this.getGamesRef(), this.gameId)
+    await updateDoc(gameRef, this.game.toJson())
   }
 }
