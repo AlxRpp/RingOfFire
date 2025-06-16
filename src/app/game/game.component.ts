@@ -44,23 +44,18 @@ import { collection, Firestore, onSnapshot, addDoc, doc, updateDoc } from '@angu
   styleUrl: './game.component.scss'
 })
 export class GameComponent implements OnInit {
-
+  firestore = inject(Firestore)
   public game!: Game
   gameId: string = ""
-  animationPlayed = false;
-  currentCard: string | undefined
   //Dialog
   readonly animal = signal('');
   readonly name = model('');
   readonly dialog = inject(MatDialog);
 
-  firestore = inject(Firestore)
-
-
-
   constructor(private route: ActivatedRoute) {
     // console.log(this.game);
   }
+
 
   ngOnInit() {
     this.newGame()
@@ -71,21 +66,23 @@ export class GameComponent implements OnInit {
     })
   }
 
+
   newGame() {
     this.game = new Game();
   }
 
+
   takeCard() {
-    if (!this.animationPlayed) {
-      this.currentCard = this.game.stack.pop();
-      this.animationPlayed = true;
-      this.saveGame();
+    if (!this.game.animationPlayed) {
+      this.game.currentCard = this.game.stack.pop();
+      this.game.animationPlayed = true;
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-      if (this.currentCard !== undefined) {
+      this.saveGame();
+      if (this.game.currentCard !== undefined) {
         setTimeout(() => {
-          this.game.playedCards.push(this.currentCard as string)
-          this.animationPlayed = false
+          this.game.playedCards.push(this.game.currentCard as string)
+          this.game.animationPlayed = false
           this.saveGame();
         }, 1000)
       } else {
@@ -99,9 +96,7 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
       data: { name: this.name(), animal: this.animal() },
     });
-
     dialogRef.afterClosed().subscribe((name: string) => {
-
       if (name !== undefined) {
         this.game.players.push(name);
         this.saveGame();
@@ -118,18 +113,20 @@ export class GameComponent implements OnInit {
   gamesList(urlId: string) {
     return onSnapshot(doc(this.getGamesRef(), urlId), (currentGame: any) => {
       console.log("Game updated", currentGame.data().players);
-
       this.game.playedCards = currentGame.data().playedCards;
       this.game.stack = currentGame.data().stack;
       this.game.players = currentGame.data().players;
       this.game.currentPlayer = currentGame.data().currentPlayer;
-
+      this.game.currentCard = currentGame.data().currentCard;
+      this.game.animationPlayed = currentGame.data().animationPlayed;
     })
   }
+
 
   async addGame(game: any) {
     await addDoc(this.getGamesRef(), game)
   }
+
 
   async saveGame() {
     const gameRef = doc(this.getGamesRef(), this.gameId)

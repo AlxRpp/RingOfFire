@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Game } from '../../models/game';
-import { Firestore, collection, onSnapshot, addDoc, doc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 
 
 @Component({
@@ -21,8 +21,6 @@ export class StartScreenComponent {
     await addDoc(this.getGamesRef(), game.toJson())
       .then((gameInfo:any) => {
         this.router.navigateByUrl("/game/" + gameInfo.id)
-
-        
       })
 
 
