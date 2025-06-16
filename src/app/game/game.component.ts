@@ -44,7 +44,7 @@ import { collection, Firestore, onSnapshot, addDoc, doc } from '@angular/fire/fi
 })
 export class GameComponent implements OnInit {
 
-  public game: Game
+  public game!: Game
   animationPlayed = false;
   currentCard: string | undefined
   //Dialog
@@ -56,17 +56,20 @@ export class GameComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute) {
-    this.game = new Game();
     // console.log(this.game);
   }
 
   ngOnInit() {
+    this.newGame()
     this.addGame(this.game.toJson());
     this.route.params.subscribe((params) => {
       this.gamesList(params['id']);
     })
   }
 
+  newGame(){
+    this.game = new Game();
+  }
 
   takeCard() {
     if (!this.animationPlayed) {

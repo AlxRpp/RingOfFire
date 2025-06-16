@@ -18,7 +18,7 @@ export class UserComponent {
 
 
   constructor(){
-     console.log(this.playerActive);
+    //  console.log(this.playerActive);
     
  }
 }
