@@ -21,6 +21,7 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
 import { GameInfosComponent } from "../game-infos/game-infos.component";
 import { ActivatedRoute } from '@angular/router';
 import { collection, Firestore, onSnapshot, addDoc, doc, updateDoc } from '@angular/fire/firestore';
+import { UserMobileComponent } from "../user-mobile/user-mobile.component";
 
 
 
@@ -30,6 +31,7 @@ import { collection, Firestore, onSnapshot, addDoc, doc, updateDoc } from '@angu
   imports: [
     CommonModule,
     UserComponent,
+    UserMobileComponent,
     UserComponent,
     MatButtonModule,
     MatIconModule,
@@ -39,7 +41,8 @@ import { collection, Firestore, onSnapshot, addDoc, doc, updateDoc } from '@angu
     MatButtonModule,
     MatDialogModule,
     GameInfosComponent,
-  ],
+    UserMobileComponent
+],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })

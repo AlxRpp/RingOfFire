@@ -6,9 +6,19 @@
 
 }
 
-.Titel{
+.Titel {
     padding-left: 16px;
     color: darkgoldenrod;
     text-decoration: underline;
     text-underline-offset: 4px;
+}
+
+@media (max-width: 720px) {
+    .gameInfos {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 125px;
+        overflow-y: auto;
+    }
 }

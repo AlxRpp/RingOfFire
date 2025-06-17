@@ -14,57 +14,86 @@
     img {
         position: absolute;
         width: 150px;
-        transform: translate(50%, -50%);
+        transform: translate(30%, 0%);
         filter: brightness(1.55);
     }
 
     .topCard {
-            cursor: pointer; 
-            transition: all .125s ease-in-out;
+        cursor: pointer;
+        transition: all .125s ease-in-out;
+
         &:hover {
-            transform: scale(1.15) translate(50%, -52%);
+            transform: scale(1.15) translate(30%, 0%);
         }
     }
 
-    .pickedCard{
-            animation: pickCard-Animation 1s ease-in-out forwards;
+    .pickedCard {
+        animation: pickCard-Animation 1s ease-in-out forwards;
     }
 
-    .playedCard{
-            transform: scale(1.25) translate(185%, -155%) rotate(200deg);
-            right: 20px;
-            top: 20px;
+    .playedCard {
+        transform: scale(1.15) translate(185%, -155%) rotate(200deg);
+        right: 225px;
+        top: 125px;
     }
 
-    @keyframes pickCard-Animation{
-        0%{
-            transform: scale(1.25) translate(50%, -50%);
+    @keyframes pickCard-Animation {
+        0% {
+            transform: scale(1.25) translate(30%, 0%);
         }
-        40%{
-            transform: scale(2.2) translate(50%, -50%);
+
+        40% {
+            transform: scale(2.2) translate(30%, 0%);
         }
-        60%{
-            transform: scale(2.2) translate(50%, -50%) ;
+
+        60% {
+            transform: scale(2.2) translate(30%, 0%);
         }
-        100%{
-            transform: scale(1.25) translate(185%, -155%) rotate(200deg);
+
+        100% {
+            transform: scale(1.15) translate(185%, -155%) rotate(200deg);
+            right: 225px;
+            top: 125px;
         }
     }
 }
 
-   .playerPosition{
-        position: absolute;
-        right: 0;
+.playerPosition {
+    position: absolute;
+    right: 0;
+}
+
+.fabBtn {
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
+    background-color: darkgoldenrod;
+    z-index: 1;
+
+    &:hover {
+        transform: scale(1.125);
+        filter: brightness(1.25)
+    }
+}
+
+.scrollMobile{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: flex;
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 16px;
     }
 
-    .fabBtn{
-        position: absolute;
-        right: 32px;
-        bottom: 32px;
-        background-color: darkgoldenrod;
-
-        &:hover{
-            transform: scale(1.125);
-            filter:brightness(1.25)
-        }
+@media (max-width: 720px) {
+    .fabBtn {
+        right: 6px;
+        bottom: 6px;
+        transform: scale(.8);
+        opacity: .85;
     }
+}

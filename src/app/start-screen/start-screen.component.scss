@@ -4,7 +4,7 @@
     object-fit: cover;
     background-image: url('../../assets/startScreen/startScreen.jpg');
     background-size: cover;
-
+    background-position: bottom;
 
     div {
         display: flex;
@@ -16,7 +16,8 @@
 
         >h1 {
             color: white;
-            font-size: 128px;
+            font-size: clamp(58px, 10vw + 1rem, 128px);
+            margin-top: 32px;
         }
 
         >button {
@@ -25,12 +26,12 @@
             border-radius: 12px;
             margin-top: 48px;
             background-color: #DB0300;
-            border:  1px solid white;
+            border: 1px solid white;
             color: white;
             font-size: 28px;
             transition: all .15s linear;
 
-            &:hover{
+            &:hover {
                 color: #FB9022;
                 border: 1px solid #FB9022;
                 cursor: pointer;
@@ -41,4 +42,4 @@
 
 
 
-}
+}   

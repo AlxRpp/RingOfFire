@@ -1,9 +1,19 @@
 <section class="playField">
 
     @for(player of game.players; track i; let i = $index){
-    <app-user [name]="player" [playerActive]="i == game.currentPlayer" class="playerPosition" [ngStyle]="{'top.px': 64 + ( 84* i)}">
+    <app-user [name]="player" [playerActive]="i == game.currentPlayer" class="playerPosition hideDesktop"
+        [ngStyle]="{'top.px': 64 + ( 84* i)}">
     </app-user>
     }
+
+    <div class="hideMobile scrollMobile">
+        @for(player of game.players; track i; let i = $index){
+        <app-user-mobile [name]="player" [playerActive]="i == game.currentPlayer">
+        </app-user-mobile>
+        }
+    </div>
+
+
     <div class="cardStack">
         <img *ngFor="let card of [0,1,2,3,]; let i = index;" [ngStyle]="{'right.px': i * 5, 'top.px': i*5}"
             src="./assets/cards/card_cover.png" alt="" srcset="">
